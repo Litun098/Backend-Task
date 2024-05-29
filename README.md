@@ -227,7 +227,7 @@ Once the server is running, you can access the APIs using tools like Postman or 
 
 - **Method**: GET
 - **URL**: No additional information
-```
+
 
 
 ## Dependencies
