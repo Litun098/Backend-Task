@@ -95,8 +95,8 @@ exports.updateItem = async (req, res) => {
     try {
       // Check if the item exists and the user is authorized to update it
       const [existingItem] = await db.query(
-        "SELECT * FROM items WHERE id = ? AND (owner_id = ? OR role = 'admin')",
-        [itemId, userId]
+        "SELECT * FROM items WHERE id = ?",
+        [itemId]
       );
   
       if (!existingItem) {
@@ -118,26 +118,27 @@ exports.updateItem = async (req, res) => {
   
 // Delete an auction item by ID
 exports.deleteItem = async (req, res) => {
-  const itemId = req.params.id;
-  const userId = req.user.id; // Assuming user ID is available in request object after authentication
-
-  try {
-    // Check if the item exists and the user is authorized to delete it
-    const [existingItem] = await db.query(
-      "SELECT * FROM items WHERE id = ? AND (user_id = ? OR role = 'admin')",
-      [itemId, userId]
-    );
-
-    if (!existingItem) {
-      return res.status(404).json({ error: "Item not found or unauthorized" });
+    const itemId = req.params.id;
+    const userId = req.user.id; // Assuming user ID is available in request object after authentication
+  
+    try {
+      // Check if the item exists and the user is authorized to delete it
+      const [existingItem] = await db.query(
+        "SELECT * FROM items WHERE id = ? AND owner_id = ?",
+        [itemId, userId]
+      );
+  
+      if (!existingItem) {
+        return res.status(404).json({ error: "Item not found or unauthorized" });
+      }
+  
+      // Delete the item from the database
+      await db.query("DELETE FROM items WHERE id = ?", [itemId]);
+  
+      res.status(200).json({ message: "Item deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting item:", error);
+      res.status(500).json({ error: "Internal server error" });
     }
-
-    // Delete the item from the database
-    await db.query("DELETE FROM items WHERE id = ?", [itemId]);
-
-    res.status(200).json({ message: "Item deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting item:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
+  };
+  
