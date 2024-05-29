@@ -5,6 +5,7 @@ const db = require('./dbConfig/db');
 const authRouter = require('./routes/authRoutes')
 const cookieParser = require('cookie-parser');
 const itemRoutes = require('./routes/itemRoutes')
+const bidRoutes = require('./routes/bidRoutes')
 
 app.use(express.json());
 app.use(cookieParser());
@@ -24,6 +25,7 @@ db.pool.getConnection((err, connection) => {
 
 app.use("/users",authRouter)
 app.use("/items",itemRoutes)
+app.use("/items",bidRoutes)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
