@@ -1,4 +1,6 @@
+# Bidding Backend
 
+This is the backend server for a bidding application.
 
 
 ### Query to create database and tables
@@ -50,3 +52,105 @@ CREATE TABLE notifications (
 
 
 ```
+
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Dependencies](#dependencies)
+- [License](#license)
+- [Author](#author)
+
+## Introduction
+
+The Bidding Backend is a Node.js server built using Express.js. It provides APIs for managing bidding-related operations such as creating auctions, placing bids, fetching items, and managing user authentication. The server uses MySQL as the database to store data related to auctions, users, and bids.
+
+## Features
+
+- User authentication using JSON Web Tokens (JWT)
+- Creating and managing auctions
+- Placing bids on items
+- Fetching items with pagination
+- Handling file uploads for item images using Multer and Cloudinary
+- Rate limiting to prevent abuse
+
+## Installation
+
+To install and run the Bidding Backend server, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/bidding-backend.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd bidding-backend
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Set up environment variables:
+   
+   Create a `.env` file in the root directory and add the following variables:
+
+   ```plaintext
+   PORT=3000
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=password
+   DB_DATABASE=bidding_db
+   JWT_SECRET=your_secret_key
+   CLOUDINARY_CLOUD_NAME=your_cloud_name
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   ```
+
+   Replace the values with your actual database and Cloudinary credentials.
+
+5. Set up the database:
+   
+   Create a MySQL database with the name specified in the `.env` file (`bidding_db` by default). Then, run the SQL scripts located in the `dbScripts` directory to create the necessary tables.
+
+6. Start the server:
+
+   ```bash
+   npm run dev
+   ```
+
+## Usage
+
+Once the server is running, you can access the APIs using tools like Postman or integrate them into your frontend application.
+
+## Dependencies
+
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs): For password hashing and verification.
+- [cloudinary](https://www.npmjs.com/package/cloudinary): For uploading images to Cloudinary.
+- [cookie-parser](https://www.npmjs.com/package/cookie-parser): For parsing cookies in Express.
+- [cors](https://www.npmjs.com/package/cors): For enabling CORS in Express middleware.
+- [dotenv](https://www.npmjs.com/package/dotenv): For loading environment variables from a `.env` file.
+- [express](https://www.npmjs.com/package/express): Fast, unopinionated, minimalist web framework for Node.js.
+- [express-rate-limit](https://www.npmjs.com/package/express-rate-limit): For rate limiting HTTP requests in Express middleware.
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken): For generating and verifying JSON Web Tokens (JWT).
+- [multer](https://www.npmjs.com/package/multer): For handling file uploads in Express.
+- [mysql2](https://www.npmjs.com/package/mysql2): MySQL client for Node.js.
+- [nodemon](https://www.npmjs.com/package/nodemon): For automatically restarting the server during development.
+- [socket.io](https://www.npmjs.com/package/socket.io): For enabling real-time bid updates using WebSockets.
+- [ws](https://www.npmjs.com/package/ws): A fast, well-tested, WebSocket client and server for Node.js.
+
+## License
+
+This project is licensed under the [ISC License](LICENSE).
+
+## Author
+
+This backend server was created by [Dibyakanta Nayak](https://github.com/your-username).
