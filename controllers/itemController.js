@@ -88,34 +88,34 @@ exports.getItemById = async (req, res) => {
 
 // Update an auction item by ID
 exports.updateItem = async (req, res) => {
-  const { name, description, starting_price, end_time } = req.body;
-  const itemId = req.params.id;
-  const userId = req.user.id; // Getting the userId from middleware
-
-  try {
-    // Check if the item exists and the user is authorized to update it
-    const [existingItem] = await db.query(
-      "SELECT * FROM items WHERE id = ? AND (user_id = ? OR role = 'admin')",
-      [itemId, userId]
-    );
-
-    if (!existingItem) {
-      return res.status(404).json({ error: "Item not found or unauthorized" });
+    const { current_price } = req.body;
+    const itemId = req.params.id;
+    const userId = req.user.id; // Getting the userId from middleware
+  
+    try {
+      // Check if the item exists and the user is authorized to update it
+      const [existingItem] = await db.query(
+        "SELECT * FROM items WHERE id = ? AND (owner_id = ? OR role = 'admin')",
+        [itemId, userId]
+      );
+  
+      if (!existingItem) {
+        return res.status(404).json({ error: "Item not found or unauthorized" });
+      }
+  
+      // Update the item in the database
+      await db.query(
+        "UPDATE items SET current_price = ? WHERE id = ?",
+        [current_price, itemId]
+      );
+  
+      res.status(200).json({ message: "Item updated successfully" });
+    } catch (error) {
+      console.error("Error updating item:", error);
+      res.status(500).json({ error: "Internal server error" });
     }
-
-    // Update the item in the database
-    await db.query(
-      "UPDATE items SET name = ?, description = ?, starting_price = ?, end_time = ? WHERE id = ?",
-      [name, description, starting_price, end_time, itemId]
-    );
-
-    res.status(200).json({ message: "Item updated successfully" });
-  } catch (error) {
-    console.error("Error updating item:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
-
+  };
+  
 // Delete an auction item by ID
 exports.deleteItem = async (req, res) => {
   const itemId = req.params.id;
