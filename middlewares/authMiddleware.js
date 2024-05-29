@@ -8,7 +8,7 @@ const verifyJWT = async (req, res, next) => {
 
     // If token not found
     if (!token) {
-      return res.status(400).json({ message: "Unauthorized access" });
+      return res.status(401).json({ message: "Unauthorized access" });
     }
 
     // Decode token
@@ -30,7 +30,7 @@ const verifyJWT = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error.message);
-    return res.status(400).json({ message: "Unauthorized access" });
+    return res.status(401).json({ message: "Unauthorized access" });
   }
 };
 module.exports = { verifyJWT };

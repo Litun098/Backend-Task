@@ -70,3 +70,42 @@ exports.profile = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+exports.changeCurrentPassword = async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const userId = req.user._id;
+
+  try {
+    // Fetch the user from the database
+    const [userRows] = await db.query("SELECT * FROM users WHERE id = ?", [
+      userId,
+    ]);
+    const user = userRows[0];
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Check if the old password is correct
+    const isPasswordCorrect = await bcrypt.compare(oldPassword, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ error: "Invalid old password" });
+    }
+
+    // Hash the new password
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the user's password in the database
+    await db.query("UPDATE users SET password = ? WHERE id = ?", [
+      hashedNewPassword,
+      userId,
+    ]);
+
+    // Send success response
+    return res.status(200).json({ message: "Password changed successfully" });
+  } catch (error) {
+    console.error("Error changing password:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
