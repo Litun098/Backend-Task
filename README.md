@@ -131,6 +131,105 @@ To install and run the Bidding Backend server, follow these steps:
 
 Once the server is running, you can access the APIs using tools like Postman or integrate them into your frontend application.
 
+
+
+# Bidding API
+
+## register
+
+- **Method**: POST
+- **URL**: `localhost:5000/users/register`
+- **Body**: 
+```json
+{
+    "username":"{{$randomUserName}}",
+    "email":"{{$randomEmail}}",
+    "password":"password"
+}
+```
+
+## login
+
+- **Method**: POST
+- **URL**: `localhost:5000/users/login`
+- **Body**: 
+```json
+{
+    "email":"Kyla55@hotmail.com",
+    "password":"password"
+}
+```
+
+## profile
+
+- **Method**: GET
+- **URL**: No additional information
+
+## add items
+
+- **Method**: POST
+- **URL**: `localhost:5000/users/items`
+- **Body**:
+  - `name`: Ancient Wine
+  - `description`: description for ancient wine
+  - `starting_price`: 200000
+  - `end_time`: 2024-06-30T23:59:59Z
+  - `image`: [File](postman-cloud:///1ef1d671-3253-4fe0-9e69-4ffbd6c946a7)
+
+## get all items
+
+- **Method**: GET
+- **URL**: `localhost:5000/items/?page=1&limit=2`
+
+## Get single item by Id
+
+- **Method**: GET
+- **URL**: `localhost:5000/items/4`
+
+## update item
+
+- **Method**: PUT
+- **URL**: `localhost:5000/items/4`
+- **Body**:
+```json
+{
+    "current_price":"1234567"
+}
+```
+
+## delete item
+
+- **Method**: DELETE
+- **URL**: `localhost:5000/items/5`
+
+## add item for bid
+
+- **Method**: POST
+- **URL**: `localhost:5000/items/6/bids`
+- **Body**:
+```json
+{
+    "bid_amount":"200001"
+}
+```
+
+## get all bids for items
+
+- **Method**: GET
+- **URL**: No additional information
+
+## get notification
+
+- **Method**: GET
+- **URL**: No additional information
+
+## mark notification as read
+
+- **Method**: GET
+- **URL**: No additional information
+```
+
+
 ## Dependencies
 
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs): For password hashing and verification.
