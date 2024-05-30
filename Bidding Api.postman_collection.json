@@ -222,7 +222,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"bid_amount\":\"200001\"\r\n}",
+					"raw": "{\r\n    \"bid_amount\":\"200002\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -248,7 +248,19 @@
 			"name": "get all bids for items",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/items/6/bids",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"items",
+						"6",
+						"bids"
+					]
+				}
 			},
 			"response": []
 		},
@@ -256,15 +268,36 @@
 			"name": "get notification",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/notifications",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"notifications"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "mark notification as read",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/notifications/mark-read",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"notifications",
+						"mark-read"
+					]
+				}
 			},
 			"response": []
 		}

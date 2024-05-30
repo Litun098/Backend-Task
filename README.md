@@ -213,20 +213,48 @@ Once the server is running, you can access the APIs using tools like Postman or 
 }
 ```
 
-## get all bids for items
+## Get All Bids for Items
+
+### Request
 
 - **Method**: GET
-- **URL**: No additional information
+- **URL**: `localhost:5000/items/6/bids`
+- **Headers**: None
 
-## get notification
+### Response
+
+- **Status**: 200 OK
+- **Body**: JSON array of bids for the specified item.
+
+---
+
+## Get Notifications
+
+### Request
 
 - **Method**: GET
-- **URL**: No additional information
+- **URL**: `localhost:5000/notifications`
+- **Headers**: None
 
-## mark notification as read
+### Response
 
-- **Method**: GET
-- **URL**: No additional information
+- **Status**: 200 OK
+- **Body**: JSON array of notifications for the logged-in user.
+
+---
+
+## Mark Notifications as Read
+
+### Request
+
+- **Method**: POST
+- **URL**: `localhost:5000/notifications/mark-read`
+- **Headers**: None
+
+### Response
+
+- **Status**: 200 OK
+- **Body**: JSON message confirming that notifications were marked as read.
 
 
 
