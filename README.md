@@ -165,6 +165,28 @@ Once the server is running, you can access the APIs using tools like Postman or 
 - **Method**: GET
 - **URL**: No additional information
 
+# Change Password
+
+## Request
+
+- **Method**: POST
+- **URL**: `localhost:5000/users/change-password`
+- **Headers**: None
+- **Body**:
+  ```json
+  {
+      "oldPassword": "password",
+      "newPassword": "newPassword"
+  }
+  ```
+
+### Response
+
+- **Status**: 200 OK
+- **Body**: JSON message confirming that the password was changed successfully.
+
+
+
 ## add items
 
 - **Method**: POST

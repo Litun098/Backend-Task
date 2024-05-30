@@ -73,7 +73,7 @@ exports.profile = async (req, res) => {
 
 exports.changeCurrentPassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body;
-  const userId = req.user._id;
+  const userId = req.user.id;
 
   try {
     // Fetch the user from the database

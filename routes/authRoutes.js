@@ -7,6 +7,6 @@ const router = express.Router();
 router.post("/register", userRegister);
 router.post("/login", login);
 router.get("/profile",verifyJWT, profile);
-router.get("/change-password",verifyJWT,changeCurrentPassword );
+router.post("/change-password",verifyJWT,changeCurrentPassword );
 
 module.exports = router;
